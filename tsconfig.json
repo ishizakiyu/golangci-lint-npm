@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "rootDir": "src",
+    "outDir": "bin",
     "target": "ES2022",
     "module": "NodeNext",
-    "strict": true
+    "strict": true,
+    "resolveJsonModule": true
   }
 }
