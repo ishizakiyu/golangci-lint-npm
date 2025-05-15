@@ -7,8 +7,11 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        check-task: [format:check, lint]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -17,8 +20,4 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Check formatting
-        run: npm run format:check
-
-      - name: Run lint
-        run: npm run lint
+      - run: npm run ${{ matrix.check-task }}
