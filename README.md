@@ -54,14 +54,14 @@ npm run golangci-lint
 
 ### Binary Location
 
-- `--bin-root <path>`
+- `-b, --bin-root <path>`
   - Specifies the root directory to store the `golangci-lint` binaries.  
     The binary will be located at `<path>/v<VERSION>/golangci-lint`.  
-    (Default: `node_modules/golangci-lint-npm/bin/v<VERSION>/golangci-lint`)
+    (Default: `node_modules/golangci-lint-npm/bin`)
 
 ```sh
-# The final binary path will be ./bin/v<VERSION>/golangci-lint
-npx golangci-lint --bin-root ./bin run
+# The final binary path will be ./bin/golangci/v<VERSION>/golangci-lint
+npx golangci-lint -b ./bin/golangci run ./...
 ```
 
 This is useful in environments like CI where `node_modules` is removed on each run.
@@ -87,7 +87,7 @@ Example `package.json` script:
 ```json
 "scripts": {
   "prettier": "prettier --write .",
-  "golangci-lint": "golangci-lint --bin-root ./bin/golangci-lint run"
+  "golangci-lint": "golangci-lint -b ./bin/golangci run ./..."
 }
 ```
 
@@ -123,8 +123,8 @@ steps:
       cache: npm
   - uses: actions/cache@v4
     with:
-      path: bin/golangci-lint
-      key: golangci-lint-${{ runner.arch }}-${{ runner.os }}-${{hashFiles('.golangci-version') }}
+      path: bin/golangci
+      key: golangci-${{ runner.arch }}-${{ runner.os }}-${{hashFiles('.golangci-version') }}
 
   - name: Format
     run: make format
