@@ -7,7 +7,7 @@ import { Command } from "@commander-js/extra-typings";
 import pkg from "../package.json" with { type: "json" };
 
 const program = new Command()
-  .option("--bin-root <path>")
+  .option("-b, --bin-root <path>")
   .helpCommand(false)
   .helpOption(false)
   .allowUnknownOption()
